@@ -707,8 +707,8 @@ export class VannaChat extends LitElement {
     `
   ];
 
-  @property() title = 'Vanna AI Chat';
-  @property() placeholder = 'Ask me anything...';
+  @property() title = '数据分析AI助手';
+  @property() placeholder = '向我提问...';
   @property({ type: Boolean }) disabled = false;
   @property({ type: Boolean }) showProgress = true;
   @property({ type: Boolean }) allowMinimize = true;

@@ -313,13 +313,13 @@ class Agent:
                     yield UiComponent(  # type: ignore
                         rich_component=StatusBarUpdateComponent(
                             status="idle",
-                            message="Ready",
-                            detail="Choose an option or type a message",
+                            message="准备",
+                            detail="你可以选一个选项，或者直接输入消息。",
                         )
                     )
                     yield UiComponent(  # type: ignore
                         rich_component=ChatInputUpdateComponent(
-                            placeholder="Ask a question...", disabled=False
+                            placeholder="提一个问题...", disabled=False
                         )
                     )
 
@@ -401,8 +401,8 @@ class Agent:
         yield UiComponent(  # type: ignore
             rich_component=StatusBarUpdateComponent(
                 status="working",
-                message="Processing your request...",
-                detail="Analyzing query",
+                message="正在处理你的请求……",
+                detail="正在分析你的请求",
             )
         )
 
@@ -476,13 +476,13 @@ class Agent:
                     yield UiComponent(  # type: ignore
                         rich_component=StatusBarUpdateComponent(
                             status="idle",
-                            message="Workflow complete",
-                            detail="Ready for next message",
+                            message="工作流完成",
+                            detail="可以发下一条了。",
                         )
                     )
                     yield UiComponent(  # type: ignore
                         rich_component=ChatInputUpdateComponent(
-                            placeholder="Ask a question...", disabled=False
+                            placeholder="提一个问题...", disabled=False
                         )
                     )
 
@@ -1015,15 +1015,15 @@ class Agent:
                 yield UiComponent(  # type: ignore
                     rich_component=StatusBarUpdateComponent(
                         status="idle",
-                        message="Response complete",
-                        detail="Ready for next message",
+                        message="处理完成",
+                        detail="准备好接收下一条消息了。",
                     )
                 )
 
                 # Update chat input placeholder
                 yield UiComponent(  # type: ignore
                     rich_component=ChatInputUpdateComponent(
-                        placeholder="Ask a follow-up question...", disabled=False
+                        placeholder="继续追问一个相关的问题...", disabled=False
                     )
                 )
 

@@ -386,8 +386,11 @@
         <div class="chat-container">
             <vanna-chat
                 id="vanna-chat"
-                api-url="http://localhost:5555"
+                api-url="http://localhost:8000"
                 placeholder="Type /test to run comprehensive test..."
+                sse-endpoint="http://localhost:8000/api/vanna/v2/chat_sse"
+                ws-endpoint="http://localhost:8000/api/vanna/v2/chat_websocket"
+                poll-endpoint="http://localhost:8000/api/vanna/v2/chat_poll">
             ></vanna-chat>
         </div>
 
@@ -408,8 +411,8 @@
     </div>
 
     <!-- Load webcomponent -->
-    <script type="module" src="/static/vanna-components.js"></script>
-
+<!--    <script type="module" src="/static/vanna-components.js"></script>-->
+    <script type="module" src="./src/index.ts"></script>
     <script type="module">
         // State
         let componentCount = 0;
@@ -431,7 +434,7 @@
         // Check backend health
         async function checkBackend() {
             try {
-                const response = await fetch('http://localhost:5555/health');
+                const response = await fetch('http://localhost:8000/health');
                 const data = await response.json();
                 backendStatus.className = 'status-dot success';
                 backendText.textContent = `Backend ready (${data.mode} mode)`;
@@ -538,7 +541,7 @@
 
             // Update backend mode
             try {
-                await fetch(`http://localhost:5555/health`);
+                await fetch(`http://localhost:8000/health`);
                 addConsoleLog('info', `Starting comprehensive test in ${mode} mode...`);
 
                 // Send test message through chat

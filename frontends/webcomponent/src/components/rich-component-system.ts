@@ -528,8 +528,8 @@ export class DataFrameComponentRenderer extends BaseComponentRenderer {
           ${title ? `<h3 class="dataframe-title">${title}</h3>` : ''}
           ${description ? `<p class="dataframe-description">${description}</p>` : ''}
           <div class="dataframe-meta">
-            <span class="row-count">${row_count} rows</span>
-            <span class="column-count">${column_count} columns</span>
+            <span class="row-count">${row_count} 行</span>
+            <span class="column-count">${column_count} 列</span>
           </div>
         </div>
       `;
@@ -541,11 +541,11 @@ export class DataFrameComponentRenderer extends BaseComponentRenderer {
         <div class="dataframe-actions">
           ${searchable ? `
             <div class="dataframe-search">
-              <input type="text" placeholder="Search..." class="search-input">
+              <input type="text" placeholder="搜索..." class="search-input">
             </div>
           ` : ''}
           ${exportable ? `
-            <button class="export-btn" title="Export to CSV">📥 Export</button>
+            <button class="export-btn" title="导出CSV">📥 导出</button>
           ` : ''}
         </div>
       `;
@@ -596,7 +596,7 @@ export class DataFrameComponentRenderer extends BaseComponentRenderer {
     } else {
       tableHTML = `
         <div class="dataframe-empty">
-          <p>No data to display</p>
+          <p>没有数据可显示</p>
         </div>
       `;
     }

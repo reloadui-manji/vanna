@@ -65,13 +65,13 @@ class RunSqlTool(Tool[RunSqlToolArgs]):
             if query_type == "SELECT":
                 # Handle SELECT queries with results
                 if df.empty:
-                    result = "Query executed successfully. No rows returned."
+                    result = "查询执行成功。 没有数据返回。"
                     ui_component = UiComponent(
                         rich_component=DataFrameComponent(
                             rows=[],
                             columns=[],
-                            title="Query Results",
-                            description="No rows returned",
+                            title="查询结果",
+                            description="没有数据返回",
                         ),
                         simple_component=SimpleTextComponent(text=result),
                     )
@@ -108,8 +108,8 @@ class RunSqlTool(Tool[RunSqlToolArgs]):
                     # Create DataFrame component for UI
                     dataframe_component = DataFrameComponent.from_records(
                         records=cast(List[Dict[str, Any]], results_data),
-                        title="Query Results",
-                        description=f"SQL query returned {row_count} rows with {len(columns)} columns",
+                        title="查询结果",
+                        description=f"SQL 查询返回了{row_count}行数据，包含{len(columns)}个列。",
                     )
 
                     ui_component = UiComponent(
@@ -129,7 +129,7 @@ class RunSqlTool(Tool[RunSqlToolArgs]):
                 # The SqlRunner should return a DataFrame with affected row count
                 rows_affected = len(df) if not df.empty else 0
                 result = (
-                    f"Query executed successfully. {rows_affected} row(s) affected."
+                    f"查询执行成功，共影响{rows_affected}行。"
                 )
 
                 metadata = {"rows_affected": rows_affected, "query_type": query_type}

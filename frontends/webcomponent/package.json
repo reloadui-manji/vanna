@@ -1,11 +1,11 @@
 {
   "name": "@vanna/webcomponent",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Lit-based web components for Vanna User Agents",
   "main": "dist/vanna-components.js",
   "scripts": {
     "sync-version": "node scripts/sync-version.js",
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "npm run sync-version && tsc && vite build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",

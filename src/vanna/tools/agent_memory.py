@@ -178,8 +178,8 @@ class SearchSavedCorrectToolUsesTool(Tool[SearchSavedCorrectToolUsesParams]):
                     ui_component = UiComponent(
                         rich_component=StatusBarUpdateComponent(
                             status="idle",
-                            message="No similar patterns found",
-                            detail="Searched agent memory",
+                            message="没有发现类似的模式",
+                            detail="已搜索的代理内存",
                         ),
                         simple_component=None,
                     )

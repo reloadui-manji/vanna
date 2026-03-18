@@ -59,14 +59,14 @@ class DefaultWorkflowHandler(WorkflowHandler):
             is_admin = "admin" in user.group_memberships
 
             help_content = (
-                "## 🤖 Vanna AI Assistant\n\n"
-                "I'm your AI data analyst! Here's what I can help you with:\n\n"
-                "**💬 Natural Language Queries**\n"
-                '- "Show me sales data for last quarter"\n'
-                '- "Which customers have the highest orders?"\n'
-                '- "Create a chart of revenue by month"\n\n'
-                "**🔧 Commands**\n"
-                "- `/help` - Show this help message\n"
+                "## 🤖 AI数据分析助手\n\n"
+                "我是你的 AI 数据分析师！我可以帮你做这些事情:\n\n"
+                "**💬 自然语言查询**\n"
+                '- "给我看看上个季度的销售数据"\n'
+                '- "哪些客户的订单量最高？"\n'
+                '- "创建一张按月份展示收入的图表"\n\n'
+                "**🔧 指令**\n"
+                "- `/help` - 显示此帮助信息\n"
             )
 
             if is_admin:
@@ -77,7 +77,7 @@ class DefaultWorkflowHandler(WorkflowHandler):
                     "- `/delete [id]` - Delete a memory by ID\n"
                 )
 
-            help_content += "\n\nJust ask me anything about your data in plain English!"
+            help_content += "\n\n用最简单的语言问我任何关于你数据的问题就行！"
 
             return WorkflowResult(
                 should_skip_llm=True,
@@ -272,9 +272,10 @@ class DefaultWorkflowHandler(WorkflowHandler):
             )
         else:
             content = (
-                "# 👋 Welcome to Vanna AI\n\n"
-                "I'm your AI data analyst assistant. Ask me anything about your data in plain English!\n\n"
-                "Type `/help` to see what I can do."
+                "# 👋 欢迎使用数据分析AI\n\n"
+                "我是AI数据分析助手. 可以问我关于你数据的任何问题!\n\n"
+                "输入 `/help` 看看我可以做什么.\n\n"
+                "输入 `/备品配件` 查看备品配件都有什么数据.\n\n"
             )
 
         return UiComponent(
