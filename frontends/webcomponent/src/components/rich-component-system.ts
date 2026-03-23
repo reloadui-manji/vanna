@@ -263,7 +263,7 @@ export class TaskListComponentRenderer extends BaseComponentRenderer {
         <h3 class="task-list-title">${title}</h3>
         ${show_progress ? `
           <div class="task-list-progress">
-            <span class="progress-text">${completedTasks}/${tasks.length} completed</span>
+            <span class="progress-text">${completedTasks}/${tasks.length} 已完成</span>
             <div class="progress-bar">
               <div class="progress-fill" style="width: ${progress}%"></div>
             </div>

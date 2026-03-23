@@ -24,7 +24,7 @@ class TaskListComponent(RichComponent):
     """Interactive task list with progress tracking."""
 
     type: ComponentType = ComponentType.TASK_LIST
-    title: str = "Tasks"
+    title: str = "任务列表"
     tasks: List[Task] = Field(default_factory=list)
     show_progress: bool = True
     allow_reorder: bool = False

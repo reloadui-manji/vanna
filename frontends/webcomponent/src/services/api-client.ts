@@ -39,6 +39,7 @@ export interface ApiClientConfig {
   pollEndpoint?: string;
   timeout?: number;
   customHeaders?: Record<string, string>;
+  accessToken?: string;
 }
 
 export class VannaApiClient {
@@ -48,6 +49,7 @@ export class VannaApiClient {
   private pollEndpoint: string;
   private timeout: number;
   private customHeaders: Record<string, string>;
+  private accessToken: string;
 
   constructor(config: ApiClientConfig = {}) {
     this.baseUrl = config.baseUrl || '';
@@ -56,6 +58,7 @@ export class VannaApiClient {
     this.pollEndpoint = config.pollEndpoint || '/api/vanna/v2/chat_poll';
     this.timeout = config.timeout || 30000;
     this.customHeaders = config.customHeaders || {};
+    this.accessToken = config.accessToken || '';
 
     console.log('[VannaApiClient] Constructor called with config:', config);
     console.log('[VannaApiClient] Endpoint configuration:');
@@ -63,6 +66,8 @@ export class VannaApiClient {
     console.log('  - WS endpoint:', this.wsEndpoint, config.wsEndpoint ? '(custom)' : '(default)');
     console.log('  - Poll endpoint:', this.pollEndpoint, config.pollEndpoint ? '(custom)' : '(default)');
     console.log('  - Base URL:', this.baseUrl || '(empty)');
+    console.log('  - Base accessToken:', this.accessToken || '(empty)');
+    console.log('  - Base customHeaders:', this.customHeaders || '(empty)');
   }
 
   /**

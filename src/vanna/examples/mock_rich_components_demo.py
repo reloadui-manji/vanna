@@ -231,7 +231,7 @@ class RichComponentsAgent(Agent):
         yield UiComponent(
             rich_component=tool_status.set_status(
                 "success",
-                "Tool completed successfully. R² = 0.85, strong correlation found.",
+                "工具执行成功. R² = 0.85, strong correlation found.",
             )
         )
 

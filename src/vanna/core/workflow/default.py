@@ -158,6 +158,29 @@ class DefaultWorkflowHandler(WorkflowHandler):
             memory_id = message.strip()[8:].strip()  # Extract ID after "/delete "
             return await self._delete_memory(agent, user, conversation, memory_id)
 
+        # Handle basic help command
+        if message.strip().lower() in ["/备品配件", "备品配件"]:
+            # Check if user is admin
+            is_admin = "admin" in user.group_memberships
+
+            help_content = (
+                "我是你的备品配件分析师！我可以帮你做这些事情:\n\n"
+
+            )
+
+            return WorkflowResult(
+                should_skip_llm=True,
+                components=[
+                    UiComponent(
+                        rich_component=RichTextComponent(
+                            content=help_content,
+                            markdown=True,
+                        ),
+                        simple_component=None,
+                    )
+                ],
+            )
+
         # Don't handle other messages, pass to LLM
         return WorkflowResult(should_skip_llm=False)
 

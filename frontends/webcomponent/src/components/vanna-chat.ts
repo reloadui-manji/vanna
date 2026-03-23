@@ -30,7 +30,7 @@ export class VannaChat extends LitElement {
         --chat-surface: var(--vanna-background-root);
         --chat-muted: var(--vanna-background-default);
         --chat-muted-stronger: var(--vanna-background-higher);
-        max-width: 1024px;
+        max-width: none;
         margin: 0 auto;
         background: var(--vanna-background-root);
         border: 1px solid var(--vanna-outline-dimmer);
@@ -130,8 +130,8 @@ export class VannaChat extends LitElement {
       .chat-layout {
         display: grid;
         grid-template-columns: minmax(0, 1fr) 300px;
-        height: 600px;
-        max-height: 80vh;
+        height: 90vh;
+        max-height: 90vh;
         background: var(--chat-muted);
       }
 
@@ -652,8 +652,8 @@ export class VannaChat extends LitElement {
       @media (max-width: 880px) {
         .chat-layout {
           grid-template-columns: 1fr;
-          height: min(600px, 85vh);
-          max-height: 85vh;
+          height: 90vh;
+          max-height: 90vh;
         }
 
         .sidebar {
@@ -671,8 +671,8 @@ export class VannaChat extends LitElement {
         }
 
         .chat-layout {
-          height: min(500px, 80vh);
-          max-height: 80vh;
+          height: 90vh;
+          max-height: 90vh;
         }
 
         .chat-header {
@@ -713,6 +713,7 @@ export class VannaChat extends LitElement {
   @property({ type: Boolean }) showProgress = true;
   @property({ type: Boolean }) allowMinimize = true;
   @property({ reflect: true }) theme = 'light';
+  @property({ attribute: 'access-token' }) accessToken = '';
   @property({ attribute: 'api-base' }) apiBaseUrl = '';
   @property({ attribute: 'sse-endpoint' }) sseEndpoint = '/api/vanna/v2/chat_sse';
   @property({ attribute: 'ws-endpoint' }) wsEndpoint = '/api/vanna/v2/chat_websocket';
@@ -760,14 +761,18 @@ export class VannaChat extends LitElement {
       baseUrl: this.apiBaseUrl,
       sseEndpoint: this.sseEndpoint,
       wsEndpoint: this.wsEndpoint,
-      pollEndpoint: this.pollEndpoint
+      pollEndpoint: this.pollEndpoint,
+      accessToken: this.accessToken,
+      customHeaders: {"Authorization":"Bearer "+this.accessToken}
     });
 
     this.apiClient = new VannaApiClient({
       baseUrl: this.apiBaseUrl,
       sseEndpoint: this.sseEndpoint,
       wsEndpoint: this.wsEndpoint,
-      pollEndpoint: this.pollEndpoint
+      pollEndpoint: this.pollEndpoint,
+      accessToken: this.accessToken,
+      customHeaders: {"Authorization":"Bearer "+this.accessToken}
     });
   }
 
@@ -886,9 +891,9 @@ export class VannaChat extends LitElement {
     console.log('_sendMessageInternal called with:', messageText);
 
     // Auto-maximize window when user sends a message (if not already maximized or minimized)
-    if (this.windowState !== 'maximized' && this.windowState !== 'minimized') {
-      this.maximizeWindow();
-    }
+    // if (this.windowState !== 'maximized' && this.windowState !== 'minimized') {
+    //   this.maximizeWindow();
+    // }
 
     // Create user message as a rich component and send to ComponentManager
     const userRichComponent: RichComponent = {
@@ -925,7 +930,7 @@ export class VannaChat extends LitElement {
     this.requestUpdate();
 
     // Update status to working (initial frontend status before backend responds)
-    this.setStatus('working', 'Sending message...', '');
+    this.setStatus('working', '发送消息...', '');
 
     // Clear input only if we're sending from the input field
     if (messageText === this.currentMessage) {
@@ -1311,16 +1316,18 @@ export class VannaChat extends LitElement {
     }
   }
 
+
+
   render() {
     return html`
       <!-- Minimized icon - shown only when minimized via CSS and allowMinimize is true -->
-      ${this.allowMinimize ? html`
+      <!-- ${this.allowMinimize ? html`
         <div class="minimized-icon" @click=${this.restoreWindow}>
           <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
             <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
           </svg>
         </div>
-      ` : ''}
+      ` : ''} -->
 
       <!-- Main chat interface -->
       <div class="chat-layout ${this.showProgress ? '' : 'compact'}">
@@ -1333,7 +1340,7 @@ export class VannaChat extends LitElement {
                   <h2 class="chat-title">${this.title}</h2>
                 </div>
               </div>
-              <div class="header-top-actions">
+              <div style="display:none;"  class="header-top-actions">
                 <div class="window-controls">
                   ${this.allowMinimize ? html`
                     <button
@@ -1377,8 +1384,8 @@ export class VannaChat extends LitElement {
                   <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
                 </svg>
               </div>
-              <div class="empty-state-text">Start a conversation</div>
-              <div class="empty-state-subtitle">Type your message below to begin chatting</div>
+              <div class="empty-state-text">开始对话</div>
+              <div class="empty-state-subtitle">在下方输入消息，开始聊天</div>
             </div>
 
             <!-- Rich Components Container - all content renders here via ComponentManager -->

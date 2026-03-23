@@ -516,8 +516,8 @@ class Agent:
 
         # Add initial task
         context_task = Task(
-            title="Load conversation context",
-            description="Reading message history and user context",
+            title="加载会话上下文",
+            description="读取消息历史和用户上下文",
             status="pending",
         )
         yield UiComponent(  # type: ignore
@@ -704,8 +704,8 @@ class Agent:
                 for i, tool_call in enumerate(response.tool_calls or []):
                     # Add task for this tool execution
                     tool_task = Task(
-                        title=f"Execute {tool_call.name}",
-                        description=f"Running tool with provided arguments",
+                        title=f"执行 {tool_call.name}",
+                        description=f"正在使用提供的参数运行工具",
                         status="in_progress",
                     )
 
@@ -880,7 +880,7 @@ class Agent:
                     # Update status card to show completion
                     final_status = "success" if result.success else "error"
                     final_description = (
-                        f"Tool completed successfully"
+                        f"工具执行成功"
                         if result.success
                         else f"Tool failed: {result.error or 'Unknown error'}"
                     )
@@ -947,7 +947,7 @@ class Agent:
                             rich_component=TaskTrackerUpdateComponent.update_task(
                                 tool_task.id,
                                 status="completed",
-                                detail=f"Tool {'completed successfully' if result.success else 'return an error'}",
+                                detail=f"工具 {'执行完成' if result.success else '执行错误'}",
                             )
                         )
 

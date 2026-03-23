@@ -237,14 +237,14 @@ export class VannaProgressTracker extends LitElement {
     return html`
       ${this.items.length > 0 ? html`
         <div class="progress-label">
-          <span class="progress-label-text">Tasks</span>
+          <span class="progress-label-text">任务列表</span>
           <span class="progress-summary">${this.getProgressSummary()}</span>
         </div>
       ` : ''}
 
       <div class="progress-list">
         ${this.items.length === 0
-          ? html`<div class="empty-state">No tasks yet</div>`
+          ? html`<div class="empty-state">暂无任务</div>`
           : this.items.map(item => html`
               <div class="progress-item ${item.status}">
                 <div class="progress-icon ${item.status}">
